@@ -4,44 +4,42 @@ esphome:
 
 esp32:
   board: adafruit_feather_esp32s3_nopsram
-  framework:
-    type: arduino
-    version: 2.0.8
+  variant: esp32s3
 
-api:
-#  encryption:
-#    key: "generate key here https://esphome.io/components/api"
-
-ota:
-#  password: "ota password"
 
 # Enable logging
 logger: 
-  level: VERY_VERBOSE
+#  level: VERY_VERBOSE
   hardware_uart: UART0
-    
-external_components:
-- source:
-    type: git
-    url: https://github.com/JeroenVanOort/esphome/
-    ref: eth-w5500
-  components:
-  - ethernet
 
+psram:
+  mode: octal
+  speed: 80MHz
+
+# Enable Home Assistant API
+api:
+#  encryption:
+#    key: "generate key here https://esphome.io/components/api"
+ota:
+#  password: "ota password"
+
+
+external_components:
 - source:
     type: git
     url: https://github.com/MichaKersloot/esphome_custom_components
   components: [ esp32_camera ]
 
+
 ethernet:
   type: W5500
-  mosi_pin: GPIO35
-  miso_pin: GPIO37
-  clk_pin: GPIO36
+  mosi_pin: GPIO1
+  miso_pin: GPIO14
+  clk_pin: GPIO21
   cs_pin: GPIO39
- # reset_pin: GPIO26
   interrupt_pin: GPIO38
-  clock_speed: 10MHz
+  clock_speed: 25MHz
+  use_address: 172.20.10.226
 
 esp32_camera:
   name: My Camera
@@ -55,6 +53,5 @@ esp32_camera:
   vsync_pin: GPIO6
   href_pin: GPIO7
   pixel_clock_pin: GPIO13
-  #reset_pin: GPIO15
-  resolution: 320x240
+  resolution: 1024x768
   jpeg_quality: 10
