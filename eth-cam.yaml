@@ -21,6 +21,7 @@ api:
 #  encryption:
 #    key: "generate key here https://esphome.io/components/api"
 ota:
+  - platform: esphome
 #  password: "ota password"
 
 
